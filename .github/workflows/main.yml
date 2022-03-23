@@ -21,4 +21,11 @@ jobs:
     # We install the DotNet dependencies we need to help build the application
     - name: Install dependencies
       run: dotnet restore
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+    - name: Test
+      run: dotnet test --no-restore --verbosity normal
+    - name: Publish Web
+      run: dotnet publish ${{ github.workspace }}\OctopusSamples.OctoPetShop.Web/OctopusSamples.OctoPetShop.Web.csproj --configuration ${{ env.BuildConfiguration }} --output ${{ github.workspace }}\output\OctoPetShop.Web\
+
 
