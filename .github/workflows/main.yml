@@ -21,8 +21,4 @@ jobs:
     # We install the DotNet dependencies we need to help build the application
     - name: Install dependencies
       run: dotnet restore
-    - name: Build
-      run: dotnet build --configuration Release --no-restore
-    - name: Test
-      run: dotnet test --no-restore --verbosity normal
-      
+
