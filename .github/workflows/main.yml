@@ -27,5 +27,18 @@ jobs:
       run: dotnet test --no-restore --verbosity normal
     - name: Publish Web
       run: dotnet publish ${{ github.workspace }}\OctopusSamples.OctoPetShop.Web/OctopusSamples.OctoPetShop.Web.csproj --configuration ${{ env.BuildConfiguration }} --output ${{ github.workspace }}\output\OctoPetShop.Web\
-
-
+    - name: Publish Product Service API
+      run: dotnet publish ${{ github.workspace }}\OctopusSamples.OctoPetShop.ProductService/OctopusSamples.OctoPetShop.ProductService.csproj --configuration ${{ env.BuildConfiguration }} --output ${{ github.workspace }}\output\OctoPetShop.ProductService\
+    - name: Publish database
+      run: dotnet publish ${{ github.workspace }}\OctopusSamples.OctoPetShop.Database\OctopusSamples.OctoPetShop.Database.csproj --configuration ${{ env.BuildConfiguration }} --output ${{ github.workspace }}\output\OctoPetShop.Database\ --runtime win-x64
+    - name: Publish Shopping Cart Service
+      run: dotnet publish ${{ github.workspace }}\OctopusSamples.OctoPetShop.ShoppingCartService\OctopusSamples.OctoPetShop.ShoppingCartService.csproj --configuration ${{ env.BuildConfiguration }} --output ${{ github.workspace }}\output\OctoPetShop.ShoppingCartService\
+    # We now pack the files created into zip files
+    - name: Package OctopusSamples.OctoPetShop.Database
+      run: octo pack --id=OctopusSamples.OctoPetShop.Database --format=Zip --version=${{ github.run_number }} --basePath=${{ github.workspace }}\output\OctoPetShop.Database\ --outFolder=${{ github.workspace }}\output
+    - name: Package OctopusSamples.OctoPetShop.Web
+      run: octo pack --id=OctopusSamples.OctoPetShop.Web --format=Zip --version=${{ github.run_number }} --basePath=${{ github.workspace }}\output\OctoPetShop.Web\ --outFolder=${{ github.workspace }}\output
+    - name: Package OctopusSamples.OctoPetShop.ProductService
+      run: octo pack --id=OctopusSamples.OctoPetShop.ProductService --format=Zip --version=${{ github.run_number }} --basePath=${{ github.workspace }}\output\OctoPetShop.ProductService\ --outFolder=${{ github.workspace }}\output
+    - name: Package OctopusSamples.Octopetshop.ShoppingCartService
+      run: octo pack --id=OctopusSamples.OctoPetShop.ShoppingCartService --format=Zip --version=${{ github.run_number }} --basePath=${{ github.workspace }}\output\OctoPetShop.ShoppingCartService\ --outFolder=${{ github.workspace }}\output
