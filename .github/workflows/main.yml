@@ -4,10 +4,12 @@ on:
   push:
     branches:
     - main
+    
 env:
   solution: '**/*.sln'
   buildPlatform: Any CPU
   buildConfiguration: Release
+  
 jobs:
   OctoPetShopBuild:
     runs-on: windows-latest
