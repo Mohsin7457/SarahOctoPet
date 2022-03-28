@@ -63,6 +63,3 @@ jobs:
         defaultPackageVersion: ${{ github.run_number }}
         version: ${{ github.run_number }}
     
-    # Deploy to Test
-    - name: Deploy to Development 
-      run: octo deploy-release --project OctoPetShop --space ${{ secrets.OCTOPUSSERVER_SPACE }} --version latest --deploy to Development --server ${{ secrets.OCTOPUSSERVERURL }} --apiKey ${{ secrets.OCTOPUSSERVERAPIKEY }}
