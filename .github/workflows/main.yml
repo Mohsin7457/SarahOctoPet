@@ -54,4 +54,3 @@ jobs:
         run: octo pack --id=OctopusSamples.OctoPetShop.ProductService --format=Zip --version=${{ github.run_number }} --basePath=${{ github.workspace }}\output\OctoPetShop.ProductService\ --outFolder=${{ github.workspace }}\output 
       - name: Package OctopusSamples.Octopetshop.ShoppingCartService
         run: octo pack --id=OctopusSamples.OctoPetShop.ShoppingCartService --format=Zip --version=${{ github.run_number }} --basePath=${{ github.workspace }}\output\OctoPetShop.ShoppingCartService\ --outFolder=${{ github.workspace }}\output
-
