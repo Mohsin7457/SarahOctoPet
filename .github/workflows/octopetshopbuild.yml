@@ -14,7 +14,16 @@ env:
 jobs:
   OctoPetShopBuild:
     runs-on: windows-latest
+  k6_load_test:
+    name: k6 Load Test
+    runs-on: ubuntu-latest
+
     steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: Run local k6 test
+      uses: grafana/k6-action@v0.2.0
+
     # We take a copy of the files within the repo and put them in our working directory
     - uses: actions/checkout@v2
     # We install the latest Octopus Deploy CLI
