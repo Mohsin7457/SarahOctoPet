@@ -1,0 +1,28 @@
+name: Release to Octopus
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+    - main
+    
+env:
+  solution: '**/*.sln'
+  buildPlatform: Any CPU
+  buildConfiguration: Release
+  
+jobs:
+  OctoPetShopBuild:
+    runs-on: windows-latest
+    steps:
+    # We take a copy of the files within the repo and put them in our working directory
+    - uses: actions/checkout@v2
+    # We install the latest Octopus Deploy CLI
+    - uses: OctopusDeploy/install-octopus-cli-action@v1.1.8
+    # We install the DotNet dependencies we need to help build the application
+    - name: Install dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+    - name: Test
+      run: dotnet test --no-restore --verbosity normal
