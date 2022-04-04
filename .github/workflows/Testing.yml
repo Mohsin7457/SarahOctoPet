@@ -26,3 +26,11 @@ jobs:
       run: dotnet build --configuration Release --no-restore
     - name: Test
       run: dotnet test --no-restore --verbosity normal
+    - name: Publish Web
+      run: dotnet publish ${{ github.workspace }}\OctopusSamples.OctoPetShop.Web/OctopusSamples.OctoPetShop.Web.csproj --configuration ${{ env.BuildConfiguration }} --output ${{ github.workspace }}\output\OctoPetShop.Web\
+    - name: Publish Product Service API
+      run: dotnet publish ${{ github.workspace }}\OctopusSamples.OctoPetShop.ProductService/OctopusSamples.OctoPetShop.ProductService.csproj --configuration ${{ env.BuildConfiguration }} --output ${{ github.workspace }}\output\OctoPetShop.ProductService\
+    - name: Publish database
+      run: dotnet publish ${{ github.workspace }}\OctopusSamples.OctoPetShop.Database\OctopusSamples.OctoPetShop.Database.csproj --configuration ${{ env.BuildConfiguration }} --output ${{ github.workspace }}\output\OctoPetShop.Database\ --runtime win-x64
+    - name: Publish Shopping Cart Service
+      run: dotnet publish ${{ github.workspace }}\OctopusSamples.OctoPetShop.ShoppingCartService\OctopusSamples.OctoPetShop.ShoppingCartService.csproj --configuration ${{ env.BuildConfiguration }} --output ${{ github.workspace }}\output\OctoPetShop.ShoppingCartService\
